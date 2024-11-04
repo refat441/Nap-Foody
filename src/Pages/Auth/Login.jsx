@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -21,9 +22,9 @@ function LoginForm() {
 
       // Save token to localStorage
       const token = response.data.token;
-      localStorage.setItem("authToken", token);
+      localStorage.setItem("Token", token);
 
-      alert("Login successful! Token saved to localStorage.");
+      toast.success(response.data.message, { position: "top-right" }); // alert("Login successful! Token saved to localStorage.");
     } catch (error) {
       console.error("Error during login:", error);
       alert("Login failed. Please check your credentials.");
