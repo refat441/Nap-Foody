@@ -5,7 +5,7 @@ import Sidebar from "../Shared/Sidebar";
 
 const RootLayout = () => {
   return (
-    <>
+    <div className="global-font bg-white">
       <header>
         <Navbar />
       </header>
@@ -20,7 +20,7 @@ const RootLayout = () => {
       <footer>
         <Footer />
       </footer>
-    </>
+    </div>
   );
 };
 
