@@ -3,9 +3,10 @@ import { HiMiniShoppingBag } from "react-icons/hi2";
 import { AiOutlineStock } from "react-icons/ai";
 import { RiMessage2Line } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
+import { FiClock } from "react-icons/fi";
 
 const Dashboard = () => {
-  // date time
+  // Date and time state
   const [dateTime, setDateTime] = useState(new Date());
 
   useEffect(() => {
@@ -26,15 +27,25 @@ const Dashboard = () => {
 
   return (
     <div className="text-black mt-4 ml-4">
-      {/* date time */}
-      <h2 className="text-2xl">{dateTime.toLocaleString("en-US", options)}</h2>
+      {/* Date and time display */}
+      <div className="flex items-center gap-3 p-4 bg-white shadow-md rounded-lg max-w-sm border border-gray-200">
+        <FiClock size={24} className="text-blue-500" />
+        <div className="flex flex-col">
+          <span className="text-gray-500 text-sm font-medium">
+            Current Date & Time
+          </span>
+          <h2 className="text-xl font-semibold text-gray-800">
+            {dateTime.toLocaleString("en-US", options)}
+          </h2>
+        </div>
+      </div>
 
       {/* total Orders, Sales, SMS and Delivered section */}
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto mt-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {/* Card 1 */}
-          <div className="flex items-center gap-4 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-            <div className="text-blue-500 text-3xl">
+          <div className="flex items-center gap-10 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+            <div className="text-blue-500 text-4xl">
               <HiMiniShoppingBag />
             </div>
             <div className="text-right">
@@ -44,8 +55,8 @@ const Dashboard = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="flex items-center gap-4 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-            <div className="text-green-500 text-3xl">
+          <div className="flex items-center gap-10 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+            <div className="text-green-500 text-4xl">
               <AiOutlineStock />
             </div>
             <div className="text-right">
@@ -55,8 +66,8 @@ const Dashboard = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="flex items-center gap-4 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-            <div className="text-purple-500 text-3xl">
+          <div className="flex items-center gap-10 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+            <div className="text-purple-500 text-4xl">
               <RiMessage2Line />
             </div>
             <div className="text-right">
@@ -66,8 +77,8 @@ const Dashboard = () => {
           </div>
 
           {/* Card 4 */}
-          <div className="flex items-center gap-4 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-            <div className="text-orange-500 text-3xl">
+          <div className="flex items-center gap-10 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+            <div className="text-orange-500 text-4xl">
               <TbTruckDelivery />
             </div>
             <div className="text-right">
