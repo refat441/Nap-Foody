@@ -24,6 +24,7 @@ const Dashboard = () => {
     second: "numeric",
     hour12: true,
   };
+  //   chart
 
   return (
     <div className="text-black mt-4 ml-4">
@@ -39,12 +40,6 @@ const Dashboard = () => {
           </h2>
         </div>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto aliquid
-        amet excepturi et libero incidunt sit qui impedit sapiente nulla
-        quibusdam saepe possimus expedita esse odit, blanditiis, eos dolorum
-        molestiae!
-      </p>
       {/* total Orders, Sales, SMS and Delivered section */}
       <div className="container mx-auto mt-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -92,6 +87,12 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+      </div>
+      {/* Charts */}
+      <div className="grid grid-cols-2 gap-6">
+        <div>01</div>
+        <div>01</div>
+        <div>09</div>
       </div>
     </div>
   );
