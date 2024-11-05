@@ -39,12 +39,17 @@ const Dashboard = () => {
           </h2>
         </div>
       </div>
-
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto aliquid
+        amet excepturi et libero incidunt sit qui impedit sapiente nulla
+        quibusdam saepe possimus expedita esse odit, blanditiis, eos dolorum
+        molestiae!
+      </p>
       {/* total Orders, Sales, SMS and Delivered section */}
       <div className="container mx-auto mt-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {/* Card 1 */}
-          <div className="flex items-center gap-10 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+          <div className="flex justify-between items-center gap-4 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
             <div className="text-blue-500 text-4xl">
               <HiMiniShoppingBag />
             </div>
@@ -55,7 +60,7 @@ const Dashboard = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="flex items-center gap-10 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+          <div className="flex  justify-between items-center gap-4 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
             <div className="text-green-500 text-4xl">
               <AiOutlineStock />
             </div>
@@ -66,7 +71,7 @@ const Dashboard = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="flex items-center gap-10 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+          <div className="flex  justify-between items-center gap-4 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
             <div className="text-purple-500 text-4xl">
               <RiMessage2Line />
             </div>
@@ -77,7 +82,7 @@ const Dashboard = () => {
           </div>
 
           {/* Card 4 */}
-          <div className="flex items-center gap-10 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+          <div className="flex  justify-between items-center gap-4 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
             <div className="text-orange-500 text-4xl">
               <TbTruckDelivery />
             </div>
