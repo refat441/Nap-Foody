@@ -27,7 +27,8 @@ function LoginForm() {
       toast.success(response.data.message, { position: "top-right" }); // alert("Login successful! Token saved to localStorage.");
     } catch (error) {
       console.error("Error during login:", error);
-      alert("Login failed. Please check your credentials.");
+      toast.error("An unknown error occurred", { position: "top-right" });
+      // alert("Login failed. Please check your credentials.");
     }
   };
 
