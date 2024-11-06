@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiSettings4Line } from "react-icons/ri";
@@ -21,6 +21,11 @@ const Sidebar = () => {
 
   // Set initial state to false for a closed sidebar
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    document.getElementById("root").style.overflow = open
+      ? "hidden"
+      : "vissible";
+  }, [open]);
 
   return (
     <section className="flex gap-6">
@@ -33,7 +38,9 @@ const Sidebar = () => {
           <HiMenuAlt3
             size={26}
             className="cursor-pointer"
-            onClick={() => setOpen(!open)}
+            onClick={() => {
+              setOpen((pre) => !pre);
+            }}
           />
         </div>
         <div className="mt-4 flex flex-col gap-4 relative">

@@ -13,7 +13,7 @@ const RootLayout = () => {
         <aside>
           <Sidebar />
         </aside>
-        <div>
+        <div className="flex-1">
           <Outlet />
         </div>
       </main>

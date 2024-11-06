@@ -4,6 +4,7 @@ import { AiOutlineStock } from "react-icons/ai";
 import { RiMessage2Line } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FiClock } from "react-icons/fi";
+import DashboardSalesAnalyticsChart from "../../Components/Chart/DashboardSalesAnalyticsChart";
 
 const Dashboard = () => {
   // Date and time state
@@ -89,8 +90,10 @@ const Dashboard = () => {
         </div>
       </div>
       {/* Charts */}
-      <div className="grid grid-cols-2 gap-6">
-        <div>01</div>
+      <div className="grid grid-cols-2 gap-6 mt-4">
+        <div className="w-full">
+          <DashboardSalesAnalyticsChart className="w-full" />
+        </div>
         <div>01</div>
         <div>09</div>
       </div>
