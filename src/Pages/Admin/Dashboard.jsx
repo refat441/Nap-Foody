@@ -5,6 +5,7 @@ import { RiMessage2Line } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FiClock } from "react-icons/fi";
 import DashboardSalesAnalyticsChart from "../../Components/Chart/DashboardSalesAnalyticsChart";
+import DashboardSalesRanking from "../../Components/Chart/DashboardSalesRanking";
 
 const Dashboard = () => {
   // Date and time state
@@ -26,6 +27,40 @@ const Dashboard = () => {
     hour12: true,
   };
   //   chart
+  const sealsAnaData = {
+    // labels: ["Mirpur", "Uttara", "Gulshan"],
+    datasets: [
+      {
+        label: "SalesRanking",
+        data: [300, 50, 100],
+        backgroundColor: [
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
+
+  const CategorysAnalytics = {
+    // labels: ["Salad", "Sandwich", "Bread", "Tuna Steak", "Fish", "Shrimp"],
+    datasets: [
+      {
+        label: "SalesRanking",
+        data: [300, 50, 100, 75, 170, 210],
+        backgroundColor: [
+          "rgb(3, 99, 232)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+          "rgb(355, 99, 132)",
+          "rgb(540, 162, 235)",
+          "rgb(155, 205, 86)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
 
   return (
     <div className="text-black mt-4 ml-4">
@@ -90,12 +125,23 @@ const Dashboard = () => {
         </div>
       </div>
       {/* Charts */}
-      <div className="grid grid-cols-2 gap-6 mt-4">
-        <div className="w-full">
-          <DashboardSalesAnalyticsChart className="w-full" />
+      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+        <div className="flex flex-col bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <p className="text-lg font-semibold text-gray-700">Sales Analytics</p>
+          <DashboardSalesAnalyticsChart />
         </div>
-        <div>01</div>
-        <div>09</div>
+        <div className="flex flex-col bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <p className="text-lg font-semibold text-gray-700">
+            Sales Ranking of Branch
+          </p>
+          <DashboardSalesRanking data={sealsAnaData} />
+        </div>
+        <div className="flex flex-col bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <p className="text-lg font-semibold text-gray-700">
+            Categories Analytics
+          </p>
+          <DashboardSalesRanking data={CategorysAnalytics} />
+        </div>
       </div>
     </div>
   );

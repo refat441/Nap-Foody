@@ -13,7 +13,7 @@ const RootLayout = () => {
         <aside>
           <Sidebar />
         </aside>
-        <div className="flex-1">
+        <div className="flex-1 h-screen overflow-auto">
           <Outlet />
         </div>
       </main>
