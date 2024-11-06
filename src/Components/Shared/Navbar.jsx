@@ -3,7 +3,7 @@ import { IoIosNotifications } from "react-icons/io";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-[#0e0e0e] ">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           Nap Foody
