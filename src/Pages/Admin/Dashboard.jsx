@@ -63,7 +63,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="text-black mt-4 ml-4">
+    <div className="text-black mt-4 ml-4 overflow-hidden">
       {/* Date and time display */}
       <div className="flex items-center gap-3 p-4 bg-white shadow-md rounded-lg max-w-sm border border-gray-200">
         <FiClock size={24} className="text-blue-500" />
