@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,23 +14,22 @@ function LoginForm() {
     try {
       const response = await axios.post(
         "https://sunny.napver.com/api/superadmin/login",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
 
       console.log("API Response:", response.data);
 
       // Save token to localStorage
       const token = response.data.token;
-      localStorage.setItem("Token", token);
+      localStorage.setItem("token", token); // Use "token" as the key consistently
 
-      toast.success(response.data.message, { position: "top-right" }); // alert("Login successful! Token saved to localStorage.");
+      toast.success(response.data.message, { position: "top-right" });
+
+      // Redirect to SuperDashboard after successful login
+      navigate("/superdashboard");
     } catch (error) {
       console.error("Error during login:", error);
       toast.error("An unknown error occurred", { position: "top-right" });
-      // alert("Login failed. Please check your credentials.");
     }
   };
 
