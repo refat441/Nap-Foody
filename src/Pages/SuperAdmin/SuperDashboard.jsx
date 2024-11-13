@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Assuming you're using react-router
+import Superadminservice from "../../services/SuperadminService";
 
 function SuperDashboard() {
   const [isActive, setIsActive] = useState(true);
@@ -15,24 +15,17 @@ function SuperDashboard() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      // Set the Authorization header with the token
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-      // Fetch data from API
-      axios
-        .get("https://sunny.napver.com/api/admin/list")
+      Superadminservice.getAllAdmins() //it's call promise coz it's return
         .then((response) => {
-          console.log("Data fetched successfully:", response.data);
-          setAdmins(response.data.admins);
+          console.log("Data fetched successfully:", response);
+          setAdmins(response.admins);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
-          if (error.response && error.response.status === 401) {
-            // Handle 401 error by removing token and redirecting to login
-            localStorage.removeItem("token");
-            alert("Session expired. Please log in again.");
-            navigate("/login"); // Redirect to login page
-          }
+          // Handle 401 error by removing token and redirecting to login
+          localStorage.removeItem("token");
+          alert("Session expired. Please log in again.");
+          navigate("/login"); // Redirect to login page
         });
     } else {
       // If no token is found, redirect to the login page
