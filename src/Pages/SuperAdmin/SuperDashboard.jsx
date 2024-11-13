@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Assuming you're using react-router
 import Superadminservice from "../../services/SuperadminService";
+import { GrUpdate } from "react-icons/gr";
+import { AiOutlineDelete } from "react-icons/ai";
 
 function SuperDashboard() {
+  //for status
   const [isActive, setIsActive] = useState(true);
   const [admins, setAdmins] = useState([]);
   const navigate = useNavigate(); // Navigation for redirects
@@ -11,6 +14,7 @@ function SuperDashboard() {
     setIsActive(!isActive);
   };
 
+  //for access the token
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -22,13 +26,12 @@ function SuperDashboard() {
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
-          // Handle 401 error by removing token and redirecting to login
+
           localStorage.removeItem("token");
           alert("Session expired. Please log in again.");
           navigate("/login"); // Redirect to login page
         });
     } else {
-      // If no token is found, redirect to the login page
       console.warn("No token found, redirecting to login.");
       navigate("/login");
     }
@@ -36,6 +39,16 @@ function SuperDashboard() {
 
   return (
     <div className="p-4 bg-gray-100 min-h-screen">
+      <div className="flex items-center justify-between p-6 bg-white shadow-md rounded-lg mb-4">
+        <h2 className="text-2xl font-semibold text-gray-800">Manage Admins</h2>
+        <button
+          className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+          title="Add New Admin"
+        >
+          Add Admin
+        </button>
+      </div>
+
       <div className="overflow-x-auto bg-white shadow-md rounded-lg">
         <table className="table-auto w-full">
           <thead className="bg-gray-800 text-white">
@@ -94,7 +107,23 @@ function SuperDashboard() {
                     {isActive ? "Active" : "Inactive"}
                   </button>
                 </td>
-                <td className="px-4 py-2">Action</td>
+                <td className="px-4 pt-3 flex items-center justify-center space-x-3">
+                  {/* Update Button */}
+                  <button
+                    className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
+                    title="Update"
+                  >
+                    <GrUpdate className="text-xl" />
+                  </button>
+
+                  {/* Delete Button */}
+                  <button
+                    className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition duration-200"
+                    title="Delete"
+                  >
+                    <AiOutlineDelete className="text-xl" />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
