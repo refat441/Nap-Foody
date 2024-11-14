@@ -17,6 +17,8 @@ function AdminUpdateForm() {
     address: "",
     status: "0",
     sms_count: "0",
+    //     updated_at: new Date().toISOString(),
+    //     created_at: new Date().toISOString(),
   });
 
   // Handle form input changes
@@ -179,3 +181,93 @@ function AdminUpdateForm() {
 }
 
 export default AdminUpdateForm;
+
+// altarnative code
+
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import Superadminservice from "../../services/SuperadminService";
+// import { toast } from "react-toastify";
+
+// function AdminUpdateForm() {
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//     phone: "",
+//     nid: "",
+//     admin_image: null, // This will store the file
+//     address: "",
+//     status: "0",
+//     sms_count: "0",
+//     updated_at: new Date().toISOString(),
+//     created_at: new Date().toISOString(),
+//   });
+
+//   const navigate = useNavigate();
+
+//   // Handle input changes
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [name]: value,
+//     }));
+//   };
+
+//   // Handle file input for admin_image
+//   const handleFileChange = (e) => {
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       admin_image: e.target.files[0], // Set file directly
+//     }));
+//   };
+
+//   // Submit the form
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     // Use FormData to include the file
+//     const data = new FormData();
+//     data.append("name", formData.name);
+//     data.append("email", formData.email);
+//     data.append("password", formData.password);
+//     data.append("phone", formData.phone);
+//     data.append("nid", formData.nid);
+//     data.append("admin_image", formData.admin_image); // File field
+//     data.append("address", formData.address);
+//     data.append("status", formData.status);
+//     data.append("sms_count", formData.sms_count);
+//     data.append("updated_at", formData.updated_at);
+//     data.append("created_at", formData.created_at);
+
+//     try {
+//       const response = await Superadminservice.registerAdmin(data);
+//       if (response && response.message === "Admin registered successfully") {
+//         toast.success("Admin added successfully!");
+//         navigate("/"); // Redirect to the main page
+//       }
+//     } catch (error) {
+//       toast.error("Error adding admin.");
+//       console.error("Error adding admin:", error);
+//     }
+//   };
+
+//   return (
+//     <div className="p-6 bg-gray-100 min-h-screen">
+//       <h2 className="text-2xl font-semibold mb-4">Add New Admin</h2>
+//       <form onSubmit={handleSubmit} className="space-y-4">
+//         <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+//         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+//         <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+//         <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} />
+//         <input type="text" name="nid" placeholder="NID" value={formData.nid} onChange={handleChange} />
+//         <input type="file" name="admin_image" onChange={handleFileChange} />
+//         <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} />
+//         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export default AdminUpdateForm;
