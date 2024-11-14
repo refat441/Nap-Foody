@@ -17,8 +17,6 @@ function AdminUpdateForm() {
     address: "",
     status: "0",
     sms_count: "0",
-    //     updated_at: new Date().toISOString(),
-    //     created_at: new Date().toISOString(),
   });
 
   // Handle form input changes
@@ -183,7 +181,6 @@ function AdminUpdateForm() {
 export default AdminUpdateForm;
 
 // altarnative code
-
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import Superadminservice from "../../services/SuperadminService";

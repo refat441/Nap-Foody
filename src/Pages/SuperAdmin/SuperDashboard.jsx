@@ -1,43 +1,59 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Assuming you're using react-router
-import Superadminservice from "../../services/SuperadminService";
+import { useNavigate } from "react-router-dom";
+import SuperAdminService from "../../services/SuperAdminService";
 import { GrUpdate } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
 
 function SuperDashboard() {
-  //for add admin button
-  const adminUpdateForm = useNavigate();
-  //for status
+  const adminUpdateForm = useNavigate(); // for navegative superadminservice page
+  //for togol status
   const [isActive, setIsActive] = useState(true);
   const [admins, setAdmins] = useState([]);
-  const navigate = useNavigate(); // Navigation for redirects
+  const navigate = useNavigate();
 
   const toggleStatus = () => {
     setIsActive(!isActive);
   };
 
-  //for access the token
+  // for access the token
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      Superadminservice.getAllAdmins() //it's call promise coz it's return
+      SuperAdminService.getAllAdmins()
         .then((response) => {
           console.log("Data fetched successfully:", response);
           setAdmins(response.admins);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
-
           localStorage.removeItem("token");
           alert("Session expired. Please log in again.");
-          navigate("/login"); // Redirect to login page
+          navigate("/login");
         });
     } else {
       console.warn("No token found, redirecting to login.");
       navigate("/login");
     }
   }, [navigate]);
+
+  // Delete function
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this admin?")) {
+      SuperAdminService.deleteAdmin(id)
+        .then(() => {
+          // Remove the deleted admin from the state
+          setAdmins((prevAdmins) =>
+            prevAdmins.filter((admin) => admin.id !== id)
+          );
+          alert("Admin deleted successfully.");
+        })
+        .catch((error) => {
+          console.error("Error deleting admin:", error);
+          alert("Failed to delete admin. Please try again.");
+        });
+    }
+  };
 
   return (
     <div className="p-4 bg-gray-100 min-h-screen">
@@ -123,6 +139,7 @@ function SuperDashboard() {
                   <button
                     className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition duration-200"
                     title="Delete"
+                    onClick={() => handleDelete(admin.id)} // Attach delete handler
                   >
                     <AiOutlineDelete className="text-xl" />
                   </button>
