@@ -156,9 +156,118 @@ function SuperDashboard() {
                     <button
                       className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
                       title="Update"
+                      onClick={() =>
+                        document.getElementById("my_modal_4").showModal()
+                      }
                     >
                       <GrUpdate className="text-xl" />
                     </button>
+
+                    <dialog id="my_modal_4" className="modal">
+                      <div className="modal-box w-full max-w-4xl">
+                        <h3 className="font-bold text-2xl mb-4 text-center text-gray-800">
+                          Update Admin Details
+                        </h3>
+                        <form className="space-y-4">
+                          {/* Name Field */}
+                          <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="w-full">
+                              <label className="block text-sm font-medium text-gray-700">
+                                Name
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="Enter name"
+                                className="input input-bordered w-full"
+                              />
+                            </div>
+
+                            {/* Email Field */}
+                            <div className="w-full">
+                              <label className="block text-sm font-medium text-gray-700">
+                                Email
+                              </label>
+                              <input
+                                type="email"
+                                placeholder="Enter email"
+                                className="input input-bordered w-full"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Password and Phone */}
+                          <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="w-full">
+                              <label className="block text-sm font-medium text-gray-700">
+                                Password
+                              </label>
+                              <input
+                                type="password"
+                                placeholder="Enter password"
+                                className="input input-bordered w-full"
+                              />
+                            </div>
+
+                            <div className="w-full">
+                              <label className="block text-sm font-medium text-gray-700">
+                                Phone
+                              </label>
+                              <input
+                                type="tel"
+                                placeholder="Enter phone number"
+                                className="input input-bordered w-full"
+                              />
+                            </div>
+                          </div>
+
+                          {/* NID and Address */}
+                          <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="w-full">
+                              <label className="block text-sm font-medium text-gray-700">
+                                NID
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="Enter NID"
+                                className="input input-bordered w-full"
+                              />
+                            </div>
+
+                            <div className="w-full">
+                              <label className="block text-sm font-medium text-gray-700">
+                                Address
+                              </label>
+                              <textarea
+                                placeholder="Enter address"
+                                className="textarea textarea-bordered w-full"
+                              ></textarea>
+                            </div>
+                          </div>
+
+                          {/* Update Button */}
+                          <div className="text-center">
+                            <button
+                              type="submit"
+                              className="btn btn-primary w-full sm:w-auto px-6 py-2 text-white bg-blue-500 hover:bg-blue-600 transition duration-200 rounded-md"
+                            >
+                              Update
+                            </button>
+                          </div>
+                        </form>
+
+                        {/* Close Modal */}
+                        <div className="modal-action">
+                          <button
+                            className="btn"
+                            onClick={() =>
+                              document.getElementById("my_modal_4").close()
+                            }
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </dialog>
 
                     {/* Delete Button */}
                     <button
