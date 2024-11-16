@@ -174,7 +174,6 @@ function SuperDashboard() {
                   </td>
                   <td className="px-4 pt-3 flex items-center justify-center space-x-3">
                     {/* Update Button */}
-                    {/* Update Button */}
                     <button
                       className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
                       title="Update"
@@ -187,9 +186,9 @@ function SuperDashboard() {
                     </button>
 
                     {/* Update Admin Dialog */}
-                    <dialog id="my_modal_4" className="modal">
-                      <div className="modal-box w-full max-w-4xl">
-                        <h3 className="font-bold text-2xl mb-4 text-center text-gray-800">
+                    <dialog id="my_modal_4" className="modal bg-transparent">
+                      <div className="modal-box w-full max-w-4xl bg-Zinc-300 shadow-lg rounded-lg">
+                        <h3 className="font-bold text-2xl mb-4 text-center text-white">
                           Update Admin Details
                         </h3>
                         <form
@@ -199,7 +198,7 @@ function SuperDashboard() {
                           {/* Name and Email Fields */}
                           <div className="flex flex-col sm:flex-row gap-4">
                             <div className="w-full">
-                              <label className="block text-sm font-medium text-gray-700">
+                              <label className="block text-sm font-medium text-white">
                                 Name
                               </label>
                               <input
@@ -212,11 +211,11 @@ function SuperDashboard() {
                                   })
                                 }
                                 placeholder="Enter name"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full text-gray-800 bg-white bg-opacity-80"
                               />
                             </div>
                             <div className="w-full">
-                              <label className="block text-sm font-medium text-gray-700">
+                              <label className="block text-sm font-medium text-white">
                                 Email
                               </label>
                               <input
@@ -229,7 +228,7 @@ function SuperDashboard() {
                                   })
                                 }
                                 placeholder="Enter email"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full text-gray-800 bg-white bg-opacity-80"
                               />
                             </div>
                           </div>
@@ -237,7 +236,7 @@ function SuperDashboard() {
                           {/* Password and Phone Fields */}
                           <div className="flex flex-col sm:flex-row gap-4">
                             <div className="w-full">
-                              <label className="block text-sm font-medium text-gray-700">
+                              <label className="block text-sm font-medium text-white">
                                 Password
                               </label>
                               <input
@@ -250,11 +249,11 @@ function SuperDashboard() {
                                   })
                                 }
                                 placeholder="Enter password"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full text-gray-800 bg-white bg-opacity-80"
                               />
                             </div>
                             <div className="w-full">
-                              <label className="block text-sm font-medium text-gray-700">
+                              <label className="block text-sm font-medium text-white">
                                 Phone
                               </label>
                               <input
@@ -267,7 +266,7 @@ function SuperDashboard() {
                                   })
                                 }
                                 placeholder="Enter phone number"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full text-gray-800 bg-white bg-opacity-80"
                               />
                             </div>
                           </div>
@@ -275,7 +274,7 @@ function SuperDashboard() {
                           {/* NID and Address Fields */}
                           <div className="flex flex-col sm:flex-row gap-4">
                             <div className="w-full">
-                              <label className="block text-sm font-medium text-gray-700">
+                              <label className="block text-sm font-medium text-white">
                                 NID
                               </label>
                               <input
@@ -288,11 +287,11 @@ function SuperDashboard() {
                                   })
                                 }
                                 placeholder="Enter NID"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full text-gray-800 bg-white bg-opacity-80"
                               />
                             </div>
                             <div className="w-full">
-                              <label className="block text-sm font-medium text-gray-700">
+                              <label className="block text-sm font-medium text-white">
                                 Address
                               </label>
                               <textarea
@@ -304,7 +303,7 @@ function SuperDashboard() {
                                   })
                                 }
                                 placeholder="Enter address"
-                                className="textarea textarea-bordered w-full"
+                                className="textarea textarea-bordered w-full text-gray-800 bg-white bg-opacity-80"
                               ></textarea>
                             </div>
                           </div>
@@ -323,7 +322,7 @@ function SuperDashboard() {
                         {/* Close Modal */}
                         <div className="modal-action">
                           <button
-                            className="btn"
+                            className="btn text-gray-200"
                             onClick={() =>
                               document.getElementById("my_modal_4").close()
                             }
