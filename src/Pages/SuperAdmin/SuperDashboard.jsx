@@ -72,6 +72,27 @@ function SuperDashboard() {
         });
     }
   };
+  // update finction
+  const [selectedAdmin, setSelectedAdmin] = useState(null);
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+    if (!selectedAdmin) return;
+
+    SuperAdminService.updateAdmin(selectedAdmin.id, selectedAdmin)
+      .then(() => {
+        setAdmins((prev) =>
+          prev.map((admin) =>
+            admin.id === selectedAdmin.id ? selectedAdmin : admin
+          )
+        );
+        alert("Admin updated successfully.");
+        document.getElementById("my_modal_4").close();
+      })
+      .catch((error) => {
+        console.error("Error updating admin:", error);
+        alert("Failed to update admin. Please try again.");
+      });
+  };
 
   return (
     <div className="p-4 bg-gray-100 min-h-screen">
@@ -153,23 +174,29 @@ function SuperDashboard() {
                   </td>
                   <td className="px-4 pt-3 flex items-center justify-center space-x-3">
                     {/* Update Button */}
+                    {/* Update Button */}
                     <button
                       className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
                       title="Update"
-                      onClick={() =>
-                        document.getElementById("my_modal_4").showModal()
-                      }
+                      onClick={() => {
+                        setSelectedAdmin(admin); // Set the selected admin data for editing
+                        document.getElementById("my_modal_4").showModal();
+                      }}
                     >
                       <GrUpdate className="text-xl" />
                     </button>
 
+                    {/* Update Admin Dialog */}
                     <dialog id="my_modal_4" className="modal">
                       <div className="modal-box w-full max-w-4xl">
                         <h3 className="font-bold text-2xl mb-4 text-center text-gray-800">
                           Update Admin Details
                         </h3>
-                        <form className="space-y-4">
-                          {/* Name Field */}
+                        <form
+                          onSubmit={handleUpdateSubmit}
+                          className="space-y-4"
+                        >
+                          {/* Name and Email Fields */}
                           <div className="flex flex-col sm:flex-row gap-4">
                             <div className="w-full">
                               <label className="block text-sm font-medium text-gray-700">
@@ -177,25 +204,37 @@ function SuperDashboard() {
                               </label>
                               <input
                                 type="text"
+                                value={selectedAdmin?.name || ""}
+                                onChange={(e) =>
+                                  setSelectedAdmin({
+                                    ...selectedAdmin,
+                                    name: e.target.value,
+                                  })
+                                }
                                 placeholder="Enter name"
                                 className="input input-bordered w-full"
                               />
                             </div>
-
-                            {/* Email Field */}
                             <div className="w-full">
                               <label className="block text-sm font-medium text-gray-700">
                                 Email
                               </label>
                               <input
                                 type="email"
+                                value={selectedAdmin?.email || ""}
+                                onChange={(e) =>
+                                  setSelectedAdmin({
+                                    ...selectedAdmin,
+                                    email: e.target.value,
+                                  })
+                                }
                                 placeholder="Enter email"
                                 className="input input-bordered w-full"
                               />
                             </div>
                           </div>
 
-                          {/* Password and Phone */}
+                          {/* Password and Phone Fields */}
                           <div className="flex flex-col sm:flex-row gap-4">
                             <div className="w-full">
                               <label className="block text-sm font-medium text-gray-700">
@@ -203,24 +242,37 @@ function SuperDashboard() {
                               </label>
                               <input
                                 type="password"
+                                value={selectedAdmin?.password || ""}
+                                onChange={(e) =>
+                                  setSelectedAdmin({
+                                    ...selectedAdmin,
+                                    password: e.target.value,
+                                  })
+                                }
                                 placeholder="Enter password"
                                 className="input input-bordered w-full"
                               />
                             </div>
-
                             <div className="w-full">
                               <label className="block text-sm font-medium text-gray-700">
                                 Phone
                               </label>
                               <input
                                 type="tel"
+                                value={selectedAdmin?.phone || ""}
+                                onChange={(e) =>
+                                  setSelectedAdmin({
+                                    ...selectedAdmin,
+                                    phone: e.target.value,
+                                  })
+                                }
                                 placeholder="Enter phone number"
                                 className="input input-bordered w-full"
                               />
                             </div>
                           </div>
 
-                          {/* NID and Address */}
+                          {/* NID and Address Fields */}
                           <div className="flex flex-col sm:flex-row gap-4">
                             <div className="w-full">
                               <label className="block text-sm font-medium text-gray-700">
@@ -228,23 +280,36 @@ function SuperDashboard() {
                               </label>
                               <input
                                 type="text"
+                                value={selectedAdmin?.nid || ""}
+                                onChange={(e) =>
+                                  setSelectedAdmin({
+                                    ...selectedAdmin,
+                                    nid: e.target.value,
+                                  })
+                                }
                                 placeholder="Enter NID"
                                 className="input input-bordered w-full"
                               />
                             </div>
-
                             <div className="w-full">
                               <label className="block text-sm font-medium text-gray-700">
                                 Address
                               </label>
                               <textarea
+                                value={selectedAdmin?.address || ""}
+                                onChange={(e) =>
+                                  setSelectedAdmin({
+                                    ...selectedAdmin,
+                                    address: e.target.value,
+                                  })
+                                }
                                 placeholder="Enter address"
                                 className="textarea textarea-bordered w-full"
                               ></textarea>
                             </div>
                           </div>
 
-                          {/* Update Button */}
+                          {/* Submit Button */}
                           <div className="text-center">
                             <button
                               type="submit"
