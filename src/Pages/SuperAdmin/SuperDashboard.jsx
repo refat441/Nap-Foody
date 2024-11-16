@@ -7,16 +7,34 @@ import { AiOutlineDelete } from "react-icons/ai";
 function SuperDashboard() {
   const adminUpdateForm = useNavigate(); // for navegative superadminservice page
   //for togol status
-  const [isActive, setIsActive] = useState(true);
   const [admins, setAdmins] = useState([]);
+  const [toggleStatusLoading, setToggleStatusLoading] = useState(null);
   const navigate = useNavigate();
 
-  const toggleStatus = () => {
-    setIsActive(!isActive);
+  const toggleStatus = (id) => {
+    setToggleStatusLoading(id);
+    SuperAdminService.toggleStatus(id)
+      .then((res) => {
+        setAdmins((prev) =>
+          prev.map((item) =>
+            item.id === id
+              ? {
+                  ...item,
+                  status: res.status,
+                }
+              : item
+          )
+        );
+      })
+      .catch((e) => console.log)
+      .finally(() => {
+        setToggleStatusLoading(null);
+      });
   };
 
   // for access the token
   useEffect(() => {
+    if (admins.length > 0) return;
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -88,64 +106,72 @@ function SuperDashboard() {
             </tr>
           </thead>
           <tbody className="text-gray-700">
-            {admins.map((admin) => (
-              <tr
-                key={admin.id}
-                className="bg-gray-100 border-b hover:bg-gray-200 transition duration-300"
-              >
-                <td className="px-4 py-2">{admin.id}</td>
-                <td className="px-4 py-2">
-                  <img
-                    src={`https://sunny.napver.com/public/storage/${admin.admin_image}`}
-                    alt="Admin"
-                    className="w-12 h-12 rounded-full"
-                  />
-                </td>
-                <td className="px-4 py-2">{admin.name}</td>
-                <td className="px-4 py-2">{admin.email}</td>
-                <td className="px-4 py-2">********</td>
-                <td className="px-4 py-2">{admin.phone}</td>
-                <td className="px-4 py-2">{admin.nid}</td>
-                <td className="px-4 py-2">{admin.address}</td>
-                <td className="px-4 py-2">{admin.sms_count}</td>
-                <td className="px-4 py-2">
-                  {new Date(admin.created_at).toLocaleDateString()}
-                </td>
-                <td className="px-4 py-2">
-                  {new Date(admin.updated_at).toLocaleDateString()}
-                </td>
-                <td className="px-4 py-2">
-                  <button
-                    onClick={toggleStatus}
-                    className={`px-4 py-2 font-semibold rounded-lg transition duration-300 ${
-                      isActive
-                        ? "bg-green-500 text-white"
-                        : "bg-red-500 text-black"
-                    }`}
-                  >
-                    {isActive ? "Active" : "Inactive"}
-                  </button>
-                </td>
-                <td className="px-4 pt-3 flex items-center justify-center space-x-3">
-                  {/* Update Button */}
-                  <button
-                    className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
-                    title="Update"
-                  >
-                    <GrUpdate className="text-xl" />
-                  </button>
+            {admins.map((admin) => {
+              const isActive = admin.status == "1";
+              return (
+                <tr
+                  key={admin.id}
+                  className="bg-gray-100 border-b hover:bg-gray-200 transition duration-300"
+                >
+                  <td className="px-4 py-2">{admin.id}</td>
+                  <td className="px-4 py-2">
+                    <img
+                      src={`https://sunny.napver.com/public/storage/${admin.admin_image}`}
+                      alt="Admin"
+                      className="w-12 h-12 rounded-full"
+                    />
+                  </td>
+                  <td className="px-4 py-2">{admin.name}</td>
+                  <td className="px-4 py-2">{admin.email}</td>
+                  <td className="px-4 py-2">********</td>
+                  <td className="px-4 py-2">{admin.phone}</td>
+                  <td className="px-4 py-2">{admin.nid}</td>
+                  <td className="px-4 py-2">{admin.address}</td>
+                  <td className="px-4 py-2">{admin.sms_count}</td>
+                  <td className="px-4 py-2">
+                    {new Date(admin.created_at).toLocaleDateString()}
+                  </td>
+                  <td className="px-4 py-2">
+                    {new Date(admin.updated_at).toLocaleDateString()}
+                  </td>
+                  <td className="px-4 py-2">
+                    <button
+                      disabled={toggleStatusLoading}
+                      onClick={() => toggleStatus(admin.id)}
+                      className={`px-4 py-2 font-semibold rounded-lg transition duration-300 ${
+                        isActive
+                          ? "bg-green-500 text-white"
+                          : "bg-red-500 text-black"
+                      }`}
+                    >
+                      {toggleStatusLoading === admin.id
+                        ? "Loaidng...."
+                        : isActive
+                        ? "Active"
+                        : "Inactive"}
+                    </button>
+                  </td>
+                  <td className="px-4 pt-3 flex items-center justify-center space-x-3">
+                    {/* Update Button */}
+                    <button
+                      className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
+                      title="Update"
+                    >
+                      <GrUpdate className="text-xl" />
+                    </button>
 
-                  {/* Delete Button */}
-                  <button
-                    className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition duration-200"
-                    title="Delete"
-                    onClick={() => handleDelete(admin.id)} // Attach delete handler
-                  >
-                    <AiOutlineDelete className="text-xl" />
-                  </button>
-                </td>
-              </tr>
-            ))}
+                    {/* Delete Button */}
+                    <button
+                      className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition duration-200"
+                      title="Delete"
+                      onClick={() => handleDelete(admin.id)} // Attach delete handler
+                    >
+                      <AiOutlineDelete className="text-xl" />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

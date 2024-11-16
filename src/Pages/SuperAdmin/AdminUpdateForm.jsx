@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Superadminservice from "../../services/SuperadminService";
-import { toast } from "react-toastify";
+import Superadminservice from "../../services/SuperAdminService";
+import toast from "react-hot-toast";
 
 function AdminUpdateForm() {
   const navigate = useNavigate();
