@@ -1,9 +1,36 @@
 import { Link } from "react-router-dom";
 import { IoIosNotifications } from "react-icons/io";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import Superadminservice from "../../services/SuperadminService";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  // Define handleLogout inside the Navbar component
+  const handleLogout = () => {
+    Superadminservice.logout()
+      .then((response) => {
+        // Show success toast
+        toast.success(response.data.message || "Logged out successfully", {
+          position: "top-right",
+        });
+
+        // Clear token and navigate to login page
+        localStorage.removeItem("token");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Error during logout:", error);
+        toast.error("An error occurred while logging out", {
+          position: "top-right",
+        });
+      });
+  };
+
   return (
-    <div className="navbar bg-[#0e0e0e] ">
+    <div className="navbar bg-[#0e0e0e]">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           Nap Foody
@@ -54,7 +81,12 @@ const Navbar = () => {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <button
+                onClick={handleLogout}
+                className="btn btn-danger bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200"
+              >
+                Logout
+              </button>
             </li>
           </ul>
         </div>

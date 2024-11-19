@@ -12,7 +12,9 @@ const Superadminservice = {
 
     deleteAdmin: async (id) => requests.delete(`/admin/${id}`), // Delete Admin API
 
-    updateAdmin: async (id, data) => requests.put(`/admin/${id}`, data) // Update Admin API
+    updateAdmin: async (id, data) => requests.put(`/admin/${id}`, data), // Update Admin API
+
+    logout: () => requests.post("/superadmin/logout") // API to log out
 };
 
 export default Superadminservice;
