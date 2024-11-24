@@ -7,7 +7,7 @@ import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({togle, toggleswp}) => {
+const Sidebar = ({ togle, toggleswp }) => {
   const menus = [
     { name: "dashboard", link: "/", icon: MdOutlineDashboard },
     { name: "user", link: "/about", icon: AiOutlineUser },
@@ -26,8 +26,6 @@ const Sidebar = ({togle, toggleswp}) => {
       ? "hidden"
       : "vissible";
   }, [togle]);
-
-
 
   return (
     <section className="flex gap-6 h-full ">
@@ -54,25 +52,25 @@ const Sidebar = ({togle, toggleswp}) => {
             >
               <div>{React.createElement(menu?.icon, { size: "20" })}</div>
               <div>
-              <h2
-                style={{
-                  transitionDelay: `${i + 0}00ms`,
-                }}
-                className={`whitespace-pre hidden sm:block  duration-00 ${
-                  !togle && "opacity-0 translate-x-28 overflow-hidden"
-                }`}
-              >
-                {menu?.name}
-              </h2>
-              <h2
-                style={{
-                  transitionDelay: `${i + 0}00ms`,
-                }}
-                className={`whitespace-pre block sm:hidden  duration-00 `}
-                onClick={toggleswp}
-              >
-                {menu?.name}
-              </h2>
+                <h2
+                  style={{
+                    transitionDelay: `${i + 0}00ms`,
+                  }}
+                  className={`whitespace-pre hidden sm:block  duration-00 ${
+                    !togle && "opacity-0 translate-x-28 overflow-hidden"
+                  }`}
+                >
+                  {menu?.name}
+                </h2>
+                <h2
+                  style={{
+                    transitionDelay: `${i + 3}00ms`,
+                  }}
+                  className={`whitespace-pre block sm:hidden  duration-00 `}
+                  onClick={toggleswp}
+                >
+                  {menu?.name}
+                </h2>
               </div>
               <h2
                 className={`${
