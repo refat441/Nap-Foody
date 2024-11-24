@@ -2,24 +2,41 @@ import { Outlet } from "react-router-dom";
 import Footer from "../Shared/Footer";
 import Navbar from "../Shared/Navbar";
 import Sidebar from "../Shared/Sidebar";
+import { useState } from "react";
 
 const RootLayout = () => {
+
+  const [togle, setTogel] = useState(false);
+
+  const toggleswp = () => {
+    setTogel((priv) => !priv)
+  };
+
   return (
-    <div className="global-font bg-white">
+    <div className="global-font   bg-white">
       <header>
-        <Navbar />
+        <Navbar toggle={setTogel} toggleswp={toggleswp}  />
       </header>
-      <main className="flex gap-3">
-        <aside>
-          <Sidebar />
+      {/* ` absolute sm:relative transition-all ${togle? "left-0" : "-left-96"}  top-0 h-full sm:h-auto  ` */}
+      <main className="flex gap-3 h-full relative  ">
+
+        {/* for pc */}
+        <aside className={" hidden md:block "} >
+          <Sidebar togle={togle} toggleswp={toggleswp} ></Sidebar>
         </aside>
-        <div className="flex-1 h-screen overflow-auto">
+        {/* for mobile */}
+        <aside className={` block md:hidden absolute sm:relative transition-all ${togle? "left-0" : "-left-96"}  top-0 h-full sm:h-auto  `} >
+          <Sidebar togle={togle} toggleswp={toggleswp} />
+        </aside>
+
+        <div className="flex-1 h-[calc(100vh-70px)] overflow-auto">
           <Outlet />
+          <footer>
+            <Footer />
+          </footer>
         </div>
       </main>
-      <footer>
-        <Footer />
-      </footer>
+      
     </div>
   );
 };

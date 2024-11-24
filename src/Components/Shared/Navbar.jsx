@@ -4,8 +4,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Superadminservice from "../../services/SuperadminService";
+import { HiMenuAlt3 } from "react-icons/hi";
 
-const Navbar = () => {
+const Navbar = ({toggleswp}) => {
   const navigate = useNavigate();
 
   // Define handleLogout inside the Navbar component
@@ -29,9 +30,20 @@ const Navbar = () => {
       });
   };
 
+  const toggleHeandle = () => {
+    toggleswp()
+  };
+
   return (
     <div className="navbar bg-[#0e0e0e]">
       <div className="flex-1">
+      <div className="py-3 flex justify-end">
+          <HiMenuAlt3
+            size={26}
+            className="cursor-pointer"
+            onClick={toggleHeandle}
+          />
+        </div>
         <Link to="/" className="btn btn-ghost text-xl">
           Nap Foody
         </Link>

@@ -7,10 +7,10 @@ import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({togle, toggleswp}) => {
   const menus = [
     { name: "dashboard", link: "/", icon: MdOutlineDashboard },
-    { name: "user", link: "/", icon: AiOutlineUser },
+    { name: "user", link: "/about", icon: AiOutlineUser },
     { name: "messages", link: "/", icon: FiMessageSquare },
     { name: "analytics", link: "/", icon: TbReportAnalytics, margin: true },
     { name: "File Manager", link: "/", icon: FiFolder },
@@ -20,29 +20,29 @@ const Sidebar = () => {
   ];
 
   // Set initial state to false for a closed sidebar
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   useEffect(() => {
-    document.getElementById("root").style.overflow = open
+    document.getElementById("root").style.overflow = togle
       ? "hidden"
       : "vissible";
-  }, [open]);
+  }, [togle]);
+
+
 
   return (
-    <section className="flex gap-6">
+    <section className="flex gap-6 h-full ">
       <div
-        className={`bg-[#0e0e0e] min-h-screen ${
-          open ? "w-60" : "w-16"
+        className={`bg-[#0e0e0e] h-full ${
+          togle ? "w-60" : " w-60 sm:w-16 "
         } duration-500 text-gray-100 px-4`}
       >
-        <div className="py-3 flex justify-end">
+        {/* <div className="py-3 flex justify-end">
           <HiMenuAlt3
             size={26}
             className="cursor-pointer"
-            onClick={() => {
-              setOpen((pre) => !pre);
-            }}
+            onClick={toggleswp}
           />
-        </div>
+        </div> */}
         <div className="mt-4 flex flex-col gap-4 relative">
           {menus?.map((menu, i) => (
             <Link
@@ -53,19 +53,30 @@ const Sidebar = () => {
               } group flex items-center text-sm gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}
             >
               <div>{React.createElement(menu?.icon, { size: "20" })}</div>
+              <div>
               <h2
                 style={{
                   transitionDelay: `${i + 0}00ms`,
                 }}
-                className={`whitespace-pre duration-00 ${
-                  !open && "opacity-0 translate-x-28 overflow-hidden"
+                className={`whitespace-pre hidden sm:block  duration-00 ${
+                  !togle && "opacity-0 translate-x-28 overflow-hidden"
                 }`}
               >
                 {menu?.name}
               </h2>
               <h2
+                style={{
+                  transitionDelay: `${i + 0}00ms`,
+                }}
+                className={`whitespace-pre block sm:hidden  duration-00 `}
+                onClick={toggleswp}
+              >
+                {menu?.name}
+              </h2>
+              </div>
+              <h2
                 className={`${
-                  open && "hidden"
+                  togle && "hidden"
                 } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit`}
               >
                 {menu?.name}
