@@ -5,13 +5,14 @@ import Login from "../Pages/Auth/Login";
 import Dashboard from "../Pages/Admin/Dashboard";
 import SuperDashboard from "../Pages/SuperAdmin/SuperDashboard";
 import AdminUpdateForm from "../Pages/SuperAdmin/AdminUpdateForm";
+import AdminLogin from "../Pages/Auth/AdminLogin";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
       {
-        path: "/",
+        path: "/dashboard",
         element: <Dashboard />,
       },
       {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/adminlogin",
+    element: <AdminLogin />,
   },
 ]);
 

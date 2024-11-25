@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = "https://sunny.napver.com/api";
 const instance = axios.create({
   baseURL: BASE_URL,
-  timeout: 30000,
+  timeout: 90000,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
