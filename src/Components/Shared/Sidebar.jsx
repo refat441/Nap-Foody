@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { MdOutlineDashboard, MdCategory } from "react-icons/md";
+import {
+  MdOutlineDashboard,
+  MdCategory,
+  MdProductionQuantityLimits,
+} from "react-icons/md";
 import { RiSettings4Line } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
@@ -12,7 +16,7 @@ const Sidebar = ({ togle, toggleswp }) => {
   const menus = [
     { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
     { name: "Category", link: "/category", icon: MdCategory },
-    { name: "messages", link: "/", icon: FiMessageSquare },
+    { name: "Product", link: "/product", icon: MdProductionQuantityLimits },
     { name: "analytics", link: "/", icon: TbReportAnalytics, margin: true },
     { name: "File Manager", link: "/", icon: FiFolder },
     { name: "Cart", link: "/", icon: FiShoppingCart },

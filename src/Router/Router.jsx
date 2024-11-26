@@ -7,6 +7,7 @@ import SuperDashboard from "../Pages/SuperAdmin/SuperDashboard";
 import AdminUpdateForm from "../Pages/SuperAdmin/AdminUpdateForm";
 import AdminLogin from "../Pages/Auth/AdminLogin";
 import Category from "../Pages/Admin/Category/Category";
+import Product from "../Pages/Admin/Product";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/category",
         element: <Category />,
+      },
+      {
+        path: "/product",
+        element: <Product />,
       },
       {
         path: "/superdashboard",
