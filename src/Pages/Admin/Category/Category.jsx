@@ -5,61 +5,56 @@ import { toast } from "react-hot-toast"; // For notifications (optional)
 const Category = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState(false); // State to handle UI during status update
+  const [toggleStatusLoading, setToggleStatusLoading] = useState(null); // Track which category is
 
-  // Get token from localStorage (for manual access or debugging)
-  const token = localStorage.getItem("token");
-
+  // Fetch categories via API
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        if (token) {
-          console.log("Token:", token); // Logging the token for debugging purposes
-
-          // Call your Adminservice API to fetch categories
-          const response = await Adminservice.showAllCategories();
-          if (response.success) {
-            setCategories(response.categories); // Save categories data
-          }
+        const response = await Adminservice.showAllCategories();
+        if (response.success) {
+          setCategories(response.categories);
         } else {
-          console.log("No token found");
+          toast.error("Failed to fetch categories.");
         }
       } catch (error) {
         console.error("Error fetching categories:", error);
+        toast.error("Error fetching categories.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchCategories();
-  }, [token]); // Dependency array includes token, so it re-fetches if token changes
+  }, []);
 
-  // Function to toggle category status
-  const toggleStatus = async (categoryId, currentStatus) => {
+  //toogle btton
+  const toggleCategoryStatus = async (id, currentStatus) => {
+    setToggleStatusLoading(id); // Show loading for the specific category
     try {
-      setUpdating(true); // Start loading
-      const newStatus = currentStatus === "1" ? "0" : "1"; // Toggle status (1 -> 0 or 0 -> 1)
-
-      // Update status in the backend
-      const response = await Adminservice.toggleStatus(categoryId, newStatus);
+      // Send API request to toggle status
+      const response = await Adminservice.toggleCategoryStatus(id);
       if (response.success) {
-        // Update local state with the new status
         setCategories((prevCategories) =>
           prevCategories.map((category) =>
-            category.id === categoryId
-              ? { ...category, status: newStatus }
+            category.id === id
+              ? { ...category, status: currentStatus === "1" ? "0" : "1" } // Toggle status
               : category
           )
         );
-        toast.success("Category status updated!");
+        toast.success(
+          `Category is now ${
+            currentStatus === "1" ? "Inactive" : "Active"
+          } successfully!`
+        );
       } else {
-        toast.error("Failed to update category status.");
+        toast.error("Failed to toggle category status.");
       }
     } catch (error) {
       console.error("Error toggling status:", error);
-      toast.error("Something went wrong.");
+      toast.error("Error toggling status.");
     } finally {
-      setUpdating(false); // Stop loading
+      setToggleStatusLoading(null); // Stop loading indicator
     }
   };
 
@@ -96,51 +91,86 @@ const Category = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700">
-            {categories.map((category) => (
-              <tr
-                key={category.id}
-                className="border-b hover:bg-gray-100 transition duration-300 ease-in-out"
-              >
-                <td className="px-6 py-4 text-sm">{category.id}</td>
-                <td className="px-6 py-4 text-sm">{category.name}</td>
-                <td className="px-6 py-4 text-sm">
-                  {category.status === "1" ? (
-                    <span className="text-green-500 font-semibold">Active</span>
-                  ) : (
-                    <span className="text-red-500 font-semibold">Inactive</span>
-                  )}
-                </td>
-                <td className="px-6 py-4 text-sm">
-                  <img
-                    src={`https://sunny.napver.com/storage/${category.category_image}`}
-                    alt={category.name}
-                    className="w-16 h-16 object-cover rounded-md border"
-                  />
-                </td>
-                <td className="px-6 py-4 text-sm">
-                  {new Date(category.created_at).toLocaleString()}
-                </td>
-                <td className="px-6 py-4 text-sm">
-                  <button
-                    onClick={() => toggleStatus(category.id, category.status)}
-                    disabled={updating} // Disable button while updating
-                    className={`${
-                      category.status === "1"
-                        ? "bg-red-500 hover:bg-red-700"
-                        : "bg-green-500 hover:bg-green-700"
-                    } text-white py-2 px-4 rounded-full transition duration-300 ease-in-out`}
-                  >
-                    {updating ? (
-                      <span>Loading...</span> // Show loading text during update
-                    ) : category.status === "1" ? (
-                      "Deactivate"
+            {categories.map((category) => {
+              const isActive = category.status === "1"; // Check if the category is active
+              return (
+                <tr
+                  key={category.id}
+                  className="border-b hover:bg-gray-100 transition duration-300 ease-in-out"
+                >
+                  <td className="px-6 py-4 text-sm">{category.id}</td>
+                  <td className="px-6 py-4 text-sm">{category.name}</td>
+                  <td className="px-6 py-4 text-sm">
+                    {isActive ? (
+                      <span className="text-green-500 font-semibold">
+                        Active
+                      </span>
                     ) : (
-                      "Activate"
+                      <span className="text-red-500 font-semibold">
+                        Inactive
+                      </span>
                     )}
-                  </button>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td className="px-6 py-4 text-sm">
+                    <img
+                      src={`https://sunny.napver.com/storage/${category.category_image}`}
+                      alt={category.name}
+                      className="w-16 h-16 object-cover rounded-md border"
+                    />
+                  </td>
+                  <td className="px-6 py-4 text-sm">
+                    {new Date(category.created_at).toLocaleString()}
+                  </td>
+                  <td className="px-6 py-4 text-sm">
+                    <button
+                      disabled={toggleStatusLoading === category.id}
+                      onClick={() =>
+                        toggleCategoryStatus(category.id, category.status)
+                      }
+                      className={`flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-full shadow-md transition-all duration-300 ${
+                        category.status === "1"
+                          ? "bg-green-100 text-green-700 hover:bg-green-200"
+                          : "bg-red-100 text-red-700 hover:bg-red-200"
+                      } disabled:opacity-50 disabled:cursor-not-allowed`}
+                    >
+                      {toggleStatusLoading === category.id ? (
+                        <svg
+                          className="w-5 h-5 animate-spin"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                          ></path>
+                        </svg>
+                      ) : (
+                        <>
+                          <span
+                            className={`w-2.5 h-2.5 rounded-full ${
+                              category.status === "1"
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          ></span>
+                          {category.status === "1" ? "Active" : "Inactive"}
+                        </>
+                      )}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

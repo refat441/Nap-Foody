@@ -6,11 +6,11 @@ import { AiOutlineDelete } from "react-icons/ai";
 
 function SuperDashboard() {
   const adminUpdateForm = useNavigate(); // for navegative superadminservice page
-  //for togol status
+
   const [admins, setAdmins] = useState([]);
   const [toggleStatusLoading, setToggleStatusLoading] = useState(null);
   const navigate = useNavigate();
-
+  //for toggol status
   const toggleStatus = (id) => {
     setToggleStatusLoading(id);
     SuperAdminService.toggleStatus(id)
