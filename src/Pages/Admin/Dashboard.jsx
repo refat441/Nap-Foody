@@ -11,42 +11,6 @@ import { useNavigate } from "react-router-dom";
 import SuperAdminService from "../../services/SuperAdminService";
 import requests from "../../services/httpRequest";
 const Dashboard = () => {
-  // for access the token
-  const [data, setData] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      // Redirect to login if token is missing
-      navigate("/adminlogin");
-      return;
-    }
-
-    const fetchData = async () => {
-      try {
-        // Use requests.get to make the API call
-        const response = await requests.get("/dashboard"); // Replace with your endpoint
-        setData(response);
-      } catch (error) {
-        console.error("Error fetching dashboard data:", error);
-
-        if (error.response && error.response.status === 401) {
-          // Clear token and redirect if unauthorized
-          localStorage.removeItem("token");
-          navigate("/adminlogin");
-        }
-      }
-    };
-
-    fetchData();
-  }, [navigate]);
-
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
   // Date and time state
   const [dateTime, setDateTime] = useState(new Date());
 
