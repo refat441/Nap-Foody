@@ -6,19 +6,15 @@ import toast from "react-hot-toast";
 import Superadminservice from "../../services/SuperadminService";
 import { HiMenuAlt3 } from "react-icons/hi";
 
-const Navbar = ({toggleswp}) => {
+const Navbar = ({ toggleswp }) => {
   const navigate = useNavigate();
 
-  // Define handleLogout inside the Navbar component
   const handleLogout = () => {
     Superadminservice.logout()
       .then((response) => {
-        // Show success toast
         toast.success(response.data.message || "Logged out successfully", {
           position: "top-right",
         });
-
-        // Clear token and navigate to login page
         localStorage.removeItem("token");
         navigate("/login");
       })
@@ -30,35 +26,40 @@ const Navbar = ({toggleswp}) => {
       });
   };
 
-  const toggleHeandle = () => {
-    toggleswp()
+  const toggleHandle = () => {
+    toggleswp();
   };
 
   return (
-    <div className="navbar bg-[#0e0e0e]">
-      <div className="flex-1">
-      <div className="py-3 flex justify-end">
+    <div className="navbar bg-white text-violet-700 shadow-md">
+      <div className="flex-1 flex items-center">
+        <div className="py-3 flex items-center">
           <HiMenuAlt3
             size={26}
             className="cursor-pointer"
-            onClick={toggleHeandle}
+            onClick={toggleHandle}
           />
         </div>
-        <Link to="/" className="btn btn-ghost text-xl">
+        <Link to="/" className="text-xl font-bold ml-4">
           Nap Foody
         </Link>
       </div>
-      <div className="flex-none">
+      <div className="flex-none flex items-center gap-4">
+        {/* Notification Dropdown */}
         <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle hover:bg-violet-100"
+          >
             <div className="indicator">
               <IoIosNotifications size={22} />
-              <span className="badge badge-sm indicator-item">8</span>
+              <span className="badge badge-sm bg-violet-700 text-white">8</span>
             </div>
           </div>
           <div
             tabIndex={0}
-            className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
+            className="card card-compact dropdown-content bg-white z-[1] mt-3 w-52 shadow"
           >
             <div className="card-body">
               <span className="text-lg font-bold">8 Items</span>
@@ -69,11 +70,13 @@ const Navbar = ({toggleswp}) => {
             </div>
           </div>
         </div>
+
+        {/* Profile Dropdown */}
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar"
+            className="btn btn-ghost btn-circle avatar hover:bg-violet-100"
           >
             <div className="w-10 rounded-full">
               <img alt="Refat" src="public/Assets/Image/Navbar/refat.jpg" />
@@ -81,23 +84,20 @@ const Navbar = ({toggleswp}) => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
+              <a className="hover:bg-violet-100">Profile</a>
             </li>
             <li>
-              <a>Settings</a>
+              <a className="hover:bg-violet-100">Settings</a>
             </li>
             <li>
               <button
                 onClick={handleLogout}
-                className="btn btn-danger bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200"
+                className="py-2 px-4 text-left text-violet-700 bg-red-100 hover:bg-red-200 rounded-md"
               >
-                Logoutt
+                Logout
               </button>
             </li>
           </ul>
