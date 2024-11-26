@@ -31,7 +31,7 @@ const Sidebar = ({ togle, toggleswp }) => {
       <div
         className={`bg-white h-full ${
           togle ? "w-60" : "w-60 sm:w-16"
-        } duration-500 text-cyan-800 px-4 shadow-md`}
+        } duration-500 text-gray-500 px-4 shadow-md`}
       >
         <div className="mt-4 flex flex-col gap-4 relative">
           {menus.map((menu, i) => (
@@ -43,8 +43,8 @@ const Sidebar = ({ togle, toggleswp }) => {
                 menu.margin && "mt-5"
               } group flex items-center text-sm gap-3.5 font-medium p-2 rounded-md ${
                 activeMenu === menu.name
-                  ? "bg-sky-100 text-cyan-800 font-bold" // Active styles
-                  : "hover:bg-gray-200"
+                  ? "bg-violet-100 text-violet-700 font-bold" // Active styles
+                  : "hover:bg-gray-200" // Gray hover remains
               }`}
             >
               <div>{React.createElement(menu.icon, { size: "20" })}</div>
@@ -72,7 +72,7 @@ const Sidebar = ({ togle, toggleswp }) => {
               <h2
                 className={`${
                   togle && "hidden"
-                } absolute left-48 bg-gray-100 font-semibold whitespace-pre text-cyan-800 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit`}
+                } absolute left-48 bg-violet-100 font-semibold whitespace-pre text-violet-700 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit`}
               >
                 {menu.name}
               </h2>
