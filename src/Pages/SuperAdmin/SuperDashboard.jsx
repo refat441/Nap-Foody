@@ -74,7 +74,7 @@ function SuperDashboard() {
     }
   };
 
-  // update finction
+  // update and edit finction
   const [selectedAdmin, setSelectedAdmin] = useState(null);
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
