@@ -8,8 +8,9 @@ function SuperDashboard() {
   const adminUpdateForm = useNavigate(); // for navegative superadminservice page
 
   const [admins, setAdmins] = useState([]);
-  const [toggleStatusLoading, setToggleStatusLoading] = useState(null);
   const navigate = useNavigate();
+  const [toggleStatusLoading, setToggleStatusLoading] = useState(null);
+
   //for toggol status
   const toggleStatus = (id) => {
     setToggleStatusLoading(id);
@@ -72,6 +73,7 @@ function SuperDashboard() {
         });
     }
   };
+
   // update finction
   const [selectedAdmin, setSelectedAdmin] = useState(null);
   const handleUpdateSubmit = (e) => {
