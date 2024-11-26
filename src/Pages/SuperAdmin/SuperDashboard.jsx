@@ -33,7 +33,7 @@ function SuperDashboard() {
       });
   };
 
-  // for access the token
+  // for access the token and admin list
   useEffect(() => {
     if (admins.length > 0) return;
     const token = localStorage.getItem("token");
