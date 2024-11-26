@@ -10,7 +10,7 @@ const Sidebar = ({ togle, toggleswp }) => {
   const [activeMenu, setActiveMenu] = useState("");
 
   const menus = [
-    { name: "dashboard", link: "/", icon: MdOutlineDashboard },
+    { name: "dashboard", link: "/dashboard", icon: MdOutlineDashboard },
     { name: "user", link: "/about", icon: AiOutlineUser },
     { name: "messages", link: "/", icon: FiMessageSquare },
     { name: "analytics", link: "/", icon: TbReportAnalytics, margin: true },

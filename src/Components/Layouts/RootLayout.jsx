@@ -17,7 +17,7 @@ const RootLayout = () => {
         <Navbar toggle={setTogel} toggleswp={toggleswp} />
       </header>
       {/* ` absolute sm:relative transition-all ${togle? "left-0" : "-left-96"}  top-0 h-full sm:h-auto  ` */}
-      <main className="flex gap-3 h-full relative  ">
+      <main className="flex h-full relative  ">
         {/* for pc */}
         <aside className={" hidden md:block "}>
           <Sidebar togle={togle} toggleswp={toggleswp}></Sidebar>
@@ -31,7 +31,7 @@ const RootLayout = () => {
           <Sidebar togle={togle} toggleswp={toggleswp} />
         </aside>
 
-        <div className="flex-1 h-[calc(100vh-70px)] overflow-auto">
+        <div className="flex-1 h-[calc(100vh-70px)] overflow-auto bg-[#f7f7fc] pl-3">
           <Outlet />
           <footer>
             <Footer />

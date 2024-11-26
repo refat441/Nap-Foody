@@ -48,7 +48,7 @@ function AdminLogin() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-xl rounded-lg p-8 max-w-md w-full">
-        <h2 className="text-3xl font-semibold text-center text-indigo-900 mb-6">
+        <h2 className="text-3xl font-semibold text-center text-violet-700 mb-6">
           Admin Login
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -61,8 +61,7 @@ function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-900 text-black"
-              // placeholder="Enter your email"
+              className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-violet-700 text-black"
             />
           </div>
           <div>
@@ -75,13 +74,12 @@ function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-900 text-black"
-                // placeholder="Enter your password"
+                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-violet-700 text-black"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-2 text-gray-500 hover:text-indigo-900"
+                className="absolute right-3 top-2 text-gray-500 hover:text-violet-700"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
@@ -104,7 +102,7 @@ function AdminLogin() {
           <div className="flex space-x-4 mt-4">
             <button
               type="submit"
-              className="w-full bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-800 transition duration-200"
+              className="w-full bg-violet-700 text-white py-2 rounded-md hover:bg-violet-600 transition duration-200"
             >
               Login
             </button>
