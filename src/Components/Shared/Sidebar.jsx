@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineDashboard, MdCategory } from "react-icons/md";
 import { RiSettings4Line } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
@@ -10,8 +10,8 @@ const Sidebar = ({ togle, toggleswp }) => {
   const [activeMenu, setActiveMenu] = useState("");
 
   const menus = [
-    { name: "dashboard", link: "/dashboard", icon: MdOutlineDashboard },
-    { name: "user", link: "/about", icon: AiOutlineUser },
+    { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
+    { name: "Category", link: "/category", icon: MdCategory },
     { name: "messages", link: "/", icon: FiMessageSquare },
     { name: "analytics", link: "/", icon: TbReportAnalytics, margin: true },
     { name: "File Manager", link: "/", icon: FiFolder },
