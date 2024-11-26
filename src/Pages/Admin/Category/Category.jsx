@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Adminservice from "../../../services/AdminService"; // Adjust the path as needed
 import { toast } from "react-hot-toast"; // For notifications (optional)
-import { GrUpdate } from "react-icons/gr";
+import { FiEdit } from "react-icons/fi";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -201,7 +201,7 @@ const Category = () => {
                       )}
                     </button>
                     <button
-                      className="p-1 sm:p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
+                      className="p-1 sm:p-2 rounded-full bg-violet-600 text-white hover:bg-violet-900 transition duration-200"
                       title="Update Category"
                       onClick={() => {
                         setSelectedCategory(category);
@@ -209,7 +209,7 @@ const Category = () => {
                         document.getElementById("category_modal").showModal();
                       }}
                     >
-                      <GrUpdate className="text-sm sm:text-xl" />
+                      <FiEdit className="text-sm sm:text-xl" />
                     </button>
                     <dialog
                       id="category_modal"
@@ -268,7 +268,7 @@ const Category = () => {
                           <div className="text-center">
                             <button
                               type="submit"
-                              className="btn btn-primary w-full sm:w-auto px-4 sm:px-6 py-2 text-white bg-blue-500 hover:bg-blue-600 transition duration-200 rounded-md"
+                              className="btn btn-primary w-full sm:w-auto px-4 sm:px-6 py-2 text-white bg-violet-600 hover:bg-violet-800 transition duration-200 rounded-md"
                             >
                               Update
                             </button>
