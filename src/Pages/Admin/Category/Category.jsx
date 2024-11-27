@@ -58,6 +58,7 @@ const Category = () => {
       setToggleStatusLoading(null); // Stop loading indicator
     }
   };
+  //togol status end
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [imagePreview, setImagePreview] = useState(null); // For image preview
@@ -85,7 +86,7 @@ const Category = () => {
       });
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>refat...</p>;
 
   return (
     <div className="overflow-x-auto px-4 py-6">
@@ -146,7 +147,7 @@ const Category = () => {
                   </td>
                   <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
                     <img
-                      src={`https://sunny.napver.com/storage/${category.category_image}`}
+                      src={`https://sunny.napver.com/public/storage/${category.category_image}`}
                       alt={category.name}
                       className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-md border"
                     />

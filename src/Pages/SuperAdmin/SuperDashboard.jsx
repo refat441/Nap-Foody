@@ -140,7 +140,7 @@ function SuperDashboard() {
                   <td className="px-4 py-2">
                     <img
                       src={`https://sunny.napver.com/public/storage/${admin.admin_image}`}
-                      alt="Admin"
+                      alt={admin.name}
                       className="w-12 h-12 rounded-full"
                     />
                   </td>
