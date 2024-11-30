@@ -8,6 +8,7 @@ import { RiSettings4Line } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
+import { BiGitBranch } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 const Sidebar = ({ togle, toggleswp }) => {
@@ -17,7 +18,7 @@ const Sidebar = ({ togle, toggleswp }) => {
     { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
     { name: "Category", link: "/category", icon: MdCategory },
     { name: "Product", link: "/product", icon: MdProductionQuantityLimits },
-    { name: "analytics", link: "/", icon: TbReportAnalytics, margin: true },
+    { name: "Branch", link: "/branch", icon: BiGitBranch, margin: true },
     { name: "File Manager", link: "/", icon: FiFolder },
     { name: "Cart", link: "/", icon: FiShoppingCart },
     { name: "Saved", link: "/", icon: AiOutlineHeart, margin: true },
