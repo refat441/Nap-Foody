@@ -1,4 +1,4 @@
 function Branch() {
-  return <div>Branch</div>;
+  return <div>the Branch</div>;
 }
 export default Branch;
