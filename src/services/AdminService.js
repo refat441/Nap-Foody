@@ -9,7 +9,8 @@ const Adminservice = {
       headers: { "Content-Type": "multipart/form-data" },
     }),
 
-    //routs for product
+  //routs for product
+  showAllProducts: async () => requests.get("/admin/products"), // API for showing category list
     
   
 };
