@@ -13,7 +13,7 @@ const Adminservice = {
   showAllProducts: async () => requests.get("/admin/products"), // API for showing category list
 
   //routs for Satff
-  showAllProducts: async () => requests.get("/admin/staff"), // API for showing staff list
+  showAllStaff: async () => requests.get("/admin/staff"), // API for showing staff list
     
   
 };
