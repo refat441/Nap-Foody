@@ -32,28 +32,47 @@ function Product() {
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Product Management</h1>
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-200 shadow-lg">
-          <thead className="bg-gray-100">
+    <div className="overflow-x-auto px-4 py-6">
+      <div className="mb-4 text-center sm:text-left">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-violet-700">
+          Product
+        </h1>
+      </div>
+      <div className="bg-white shadow-lg rounded-lg overflow-hidden overflow-x-auto">
+        <table className="min-w-full table-auto">
+          <thead className="bg-violet-700 text-white">
             <tr>
-              <th className="px-4 py-2 border">ID</th>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Price</th>
-              <th className="px-4 py-2 border">Image</th>
+              <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
+                ID
+              </th>
+              <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
+                Name
+              </th>
+              <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
+                Price
+              </th>
+              <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
+                Image
+              </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-gray-700">
             {products.length > 0 ? (
               products.map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-2 border text-center">{product.id}</td>
-                  <td className="px-4 py-2 border">{product.name}</td>
-                  <td className="px-4 py-2 border text-center">
+                <tr
+                  key={product.id}
+                  className="border-b hover:bg-gray-100 transition duration-300 ease-in-out"
+                >
+                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm ">
+                    {product.id}
+                  </td>
+                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                    {product.name}
+                  </td>
+                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm ">
                     {product.price}
                   </td>
-                  <td className="px-4 py-2 border">
+                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
                     <img
                       src={`https://sunny.napver.com/storage/${product.product_image}`}
                       alt={product.name}
