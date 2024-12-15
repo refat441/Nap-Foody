@@ -34,7 +34,7 @@ function LoginForm() {
       toast.success(response.data.message, { position: "top-right" });
 
       // Redirect to SuperDashboard after successful login
-      navigate("/superdashboard");
+      navigate("/dashboard/superdashboard");
     } catch (error) {
       console.error("Error during login:", error);
       toast.error("An unknown error occurred", { position: "top-right" });
