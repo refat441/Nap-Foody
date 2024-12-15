@@ -12,6 +12,9 @@ const Adminservice = {
   //routs for product
   showAllProducts: async () => requests.get("/admin/products"), // API for showing category list
 
+  //routs for branches
+  showAllBranches: async () => requests.get("/admin/branches"), // API for showing branches list
+
   //routs for Satff
   showAllStaff: async () => requests.get("/admin/staff"), // API for showing staff list
     
