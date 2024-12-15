@@ -3,6 +3,13 @@ import Adminservice from "../../../services/AdminService"; // Adjust the path as
 import { toast } from "react-hot-toast"; // For notifications (optional)
 import { FiEdit } from "react-icons/fi";
 
+// Loading Spinner Component
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center">
+    <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+  </div>
+);
+
 const Category = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -86,7 +93,13 @@ const Category = () => {
       });
   };
 
-  if (loading) return <p>refat...</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="overflow-x-auto px-4 py-6">

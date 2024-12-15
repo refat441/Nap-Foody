@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import Adminservice from "../../services/AdminService";
 
+// Loading Spinner Component
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center">
+    <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+  </div>
+);
+
 function Branches() {
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,8 +34,13 @@ function Branches() {
     fetchBranches();
   }, []);
 
+  // Show spinner while loading
   if (loading) {
-    return <div>Loading...</div>; // Optional: show a loading indicator
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   return (
