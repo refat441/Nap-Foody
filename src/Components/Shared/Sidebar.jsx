@@ -17,10 +17,19 @@ const Sidebar = ({ togle, toggleswp }) => {
 
   const menus = [
     { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
-    { name: "Category", link: "/category", icon: MdCategory },
-    { name: "Product", link: "/product", icon: MdProductionQuantityLimits },
-    { name: "Branch", link: "/branch", icon: BiGitBranch, margin: true },
-    { name: "Staff", link: "/staff", icon: FaUsers },
+    { name: "Category", link: "/dashboard/category", icon: MdCategory },
+    {
+      name: "Product",
+      link: "/dashboard/product",
+      icon: MdProductionQuantityLimits,
+    },
+    {
+      name: "Branch",
+      link: "/dashboard/branch",
+      icon: BiGitBranch,
+      margin: true,
+    },
+    { name: "Staff", link: "/dashboard/staff", icon: FaUsers },
     { name: "Cart", link: "/", icon: FiShoppingCart },
     { name: "Saved", link: "/", icon: AiOutlineHeart, margin: true },
     { name: "Setting", link: "/", icon: RiSettings4Line },
