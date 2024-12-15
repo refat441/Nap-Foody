@@ -114,6 +114,11 @@ function AdminLogin() {
               Reset
             </button>
           </div>
+          <div>
+            <p className="text-gray-500">
+              username: refat@gmail.com || password:12345678
+            </p>
+          </div>
         </form>
       </div>
     </div>
