@@ -12,6 +12,7 @@ const LoadingSpinner = () => (
 function Staff() {
   const [staff, setStaff] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [toggleStatusLoading, setToggleStatusLoading] = useState(null);
 
   // Fetch staff via API
   useEffect(() => {
@@ -34,6 +35,38 @@ function Staff() {
     fetchStaff();
   }, []);
 
+  // for toggle button
+  const toggleStaffStatus = async (id, currentStatus) => {
+    try {
+      setToggleStatusLoading(id); // Start loading indicator
+
+      // Send API request to toggle status
+      const response = await Adminservice.toggleStaffStatus(id);
+      if (response.success) {
+        setStaff((prevStaff) =>
+          prevStaff.map((staff) =>
+            staff.id === id
+              ? { ...staff, status: currentStatus === "1" ? "0" : "1" } // Toggle status
+              : staff
+          )
+        );
+        toast.success(
+          `Staff is now ${
+            currentStatus === "1" ? "Inactive" : "Active"
+          } successfully!`
+        );
+      } else {
+        toast.error("Failed to toggle staff status.");
+      }
+    } catch (error) {
+      console.error("Error toggling status:", error);
+      toast.error("Error toggling status.");
+    } finally {
+      setToggleStatusLoading(null); // Stop loading indicator
+    }
+  };
+
+  // for disply loding ui.....
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -83,6 +116,9 @@ function Staff() {
               <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
                 Password
               </th>
+              <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody className="text-gray-700">
@@ -125,6 +161,51 @@ function Staff() {
                   </td>
                   <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
                     {member.password}
+                  </td>
+                  <td className="px-3 py-4 text-xs md:text-sm flex items-center space-x-2 sm:space-x-3">
+                    <button
+                      disabled={toggleStatusLoading === staff.id}
+                      onClick={() => toggleStaffStatus(staff.id, staff.status)}
+                      className={`flex items-center justify-center gap-2 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-full shadow-md transition-all duration-300 ${
+                        staff.status === "1"
+                          ? "bg-green-100 text-green-700 hover:bg-green-200"
+                          : "bg-red-100 text-red-700 hover:bg-red-200"
+                      } disabled:opacity-50 disabled:cursor-not-allowed`}
+                    >
+                      {toggleStatusLoading === staff.id ? (
+                        <svg
+                          className="w-4 h-4 sm:w-5 sm:h-5 animate-spin"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                          ></path>
+                        </svg>
+                      ) : (
+                        <>
+                          <span
+                            className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full ${
+                              staff.status === "1"
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          ></span>
+                          {staff.status === "1" ? "Active" : "Inactive"}
+                        </>
+                      )}
+                    </button>
                   </td>
                 </tr>
               ))

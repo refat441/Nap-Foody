@@ -18,6 +18,7 @@ const Adminservice = {
 
   //routs for Satff
   showAllStaff: async () => requests.get("/admin/staff"), // API for showing staff list
+  toggleStaffStatus: async (id) => requests.put(`/admin/staff/status/${id}`), // API for toggling admin status
     
   
 };
