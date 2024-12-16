@@ -11,6 +11,7 @@ const Adminservice = {
 
   //routs for product
   showAllProducts: async () => requests.get("/admin/products"), // API for showing category list
+  toggleProductStatus: async (id) => requests.put(`/admin/products/${id}/status`), // API for toggling admin status
 
   //routs for branches
   showAllBranches: async () => requests.get("/admin/branches"), // API for showing branches list
