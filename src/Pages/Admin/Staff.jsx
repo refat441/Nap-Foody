@@ -96,6 +96,9 @@ function Staff() {
                 Name
               </th>
               <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
+                Status
+              </th>
+              <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
                 Role
               </th>
               <th className="px-3 py-2 md:px-6 md:py-3 text-left text-xs md:text-sm font-semibold">
@@ -123,92 +126,106 @@ function Staff() {
           </thead>
           <tbody className="text-gray-700">
             {staff.length > 0 ? (
-              staff.map((member) => (
-                <tr
-                  key={member.id}
-                  className="border-b hover:bg-gray-100 transition duration-300 ease-in-out"
-                >
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.id}
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    <img
-                      src={`https://sunny.napver.com/storage/${member.staff_image}`}
-                      alt={member.name}
-                      className="w-20 h-20 object-cover rounded shadow"
-                    />
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.name}
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.role}
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.branch_id}
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.phone}
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.nid}
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.address}
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.email}
-                  </td>
-                  <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
-                    {member.password}
-                  </td>
-                  <td className="px-3 py-4 text-xs md:text-sm flex items-center space-x-2 sm:space-x-3">
-                    <button
-                      disabled={toggleStatusLoading === staff.id}
-                      onClick={() => toggleStaffStatus(staff.id, staff.status)}
-                      className={`flex items-center justify-center gap-2 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-full shadow-md transition-all duration-300 ${
-                        staff.status === "1"
-                          ? "bg-green-100 text-green-700 hover:bg-green-200"
-                          : "bg-red-100 text-red-700 hover:bg-red-200"
-                      } disabled:opacity-50 disabled:cursor-not-allowed`}
-                    >
-                      {toggleStatusLoading === staff.id ? (
-                        <svg
-                          className="w-4 h-4 sm:w-5 sm:h-5 animate-spin"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                          ></path>
-                        </svg>
+              staff.map((member) => {
+                const isActive = member.status === "1"; // Correct isActive logic
+                return (
+                  <tr
+                    key={member.id}
+                    className="border-b hover:bg-gray-100 transition duration-300 ease-in-out"
+                  >
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.id}
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      <img
+                        src={`https://sunny.napver.com/storage/${member.staff_image}`}
+                        alt={member.name}
+                        className="w-20 h-20 object-cover rounded shadow"
+                      />
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.name}
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {isActive ? (
+                        <span className="text-green-500 font-semibold">
+                          Active
+                        </span>
                       ) : (
-                        <>
-                          <span
-                            className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full ${
-                              staff.status === "1"
-                                ? "bg-green-500"
-                                : "bg-red-500"
-                            }`}
-                          ></span>
-                          {staff.status === "1" ? "Active" : "Inactive"}
-                        </>
+                        <span className="text-red-500 font-semibold">
+                          Inactive
+                        </span>
                       )}
-                    </button>
-                  </td>
-                </tr>
-              ))
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.role}
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.branch_id}
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.phone}
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.nid}
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.address}
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.email}
+                    </td>
+                    <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
+                      {member.password}
+                    </td>
+                    <td className="px-3 py-4 text-xs md:text-sm flex items-center space-x-2 sm:space-x-3">
+                      <button
+                        disabled={toggleStatusLoading === member.id}
+                        onClick={() =>
+                          toggleStaffStatus(member.id, member.status)
+                        }
+                        className={`flex items-center justify-center gap-2 px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-full shadow-md transition-all duration-300 ${
+                          isActive
+                            ? "bg-green-100 text-green-700 hover:bg-green-200"
+                            : "bg-red-100 text-red-700 hover:bg-red-200"
+                        } disabled:opacity-50 disabled:cursor-not-allowed`}
+                      >
+                        {toggleStatusLoading === member.id ? (
+                          <svg
+                            className="w-4 h-4 sm:w-5 sm:h-5 animate-spin"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                            ></path>
+                          </svg>
+                        ) : (
+                          <>
+                            <span
+                              className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full ${
+                                isActive ? "bg-green-500" : "bg-red-500"
+                              }`}
+                            ></span>
+                            {isActive ? "Active" : "Inactive"}
+                          </>
+                        )}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan="10" className="text-center py-4 text-gray-500">
