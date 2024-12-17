@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Adminservice from "../../../services/AdminService"; // Adjust the path as needed
 import { toast } from "react-hot-toast"; // For notifications (optional)
-import { FiEdit } from "react-icons/fi";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 // Loading Spinner Component
 const LoadingSpinner = () => (
@@ -67,6 +67,7 @@ const Category = () => {
   };
   //togol status end
 
+  // edit and upadate
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [imagePreview, setImagePreview] = useState(null); // For image preview
 
@@ -93,6 +94,29 @@ const Category = () => {
       });
   };
 
+  // delete function
+  const handleDeleteCategory = (id) => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      Adminservice.deleteCategory(id)
+        .then(() => {
+          // Remove the deleted category from the state
+          setCategories((prevCategories) =>
+            prevCategories.filter((category) => category.id !== id)
+          );
+          toast.success("Category deleted successfully.", {
+            position: "top-right",
+          });
+        })
+        .catch((error) => {
+          console.error("Error deleting category:", error);
+          toast.error("Failed to delete category. Please try again.", {
+            position: "top-right",
+          });
+        });
+    }
+  };
+
+  // for loading.....
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -169,6 +193,7 @@ const Category = () => {
                     {new Date(category.created_at).toLocaleString()}
                   </td>
                   <td className="px-3 py-4 text-xs md:text-sm flex items-center space-x-2 sm:space-x-3">
+                    {/* toggle button */}
                     <button
                       disabled={toggleStatusLoading === category.id}
                       onClick={() =>
@@ -214,6 +239,7 @@ const Category = () => {
                         </>
                       )}
                     </button>
+                    {/* update button */}
                     <button
                       className="p-1 sm:p-2 rounded-full bg-violet-600 text-white hover:bg-violet-900 transition duration-200"
                       title="Update Category"
@@ -301,6 +327,14 @@ const Category = () => {
                         </div>
                       </div>
                     </dialog>
+                    {/* delete button */}
+                    <button
+                      onClick={() => handleDeleteCategory(category.id)}
+                      className="p-2.5 rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white focus:ring-2 focus:ring-red-300 transition-all duration-200"
+                      title="Delete"
+                    >
+                      <FiTrash2 className="text-xl" />
+                    </button>
                   </td>
                 </tr>
               );
