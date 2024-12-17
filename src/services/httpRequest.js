@@ -1,6 +1,6 @@
 
 import axios from "axios";
-const BASE_URL = "https://sunny.napver.com/api";
+const BASE_URL = "https://adminfoodi.napver.com/api";
 const instance = axios.create({
   baseURL: BASE_URL,
   timeout: 90000,

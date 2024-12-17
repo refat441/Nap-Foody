@@ -21,7 +21,7 @@ function LoginForm() {
 
     try {
       const response = await axios.post(
-        "https://sunny.napver.com/api/superadmin/login",
+        "https://adminfoodi.napver.com/api/superadmin/login",
         { email, password }
       );
 
