@@ -18,9 +18,9 @@ function Staff() {
   useEffect(() => {
     const fetchStaff = async () => {
       try {
-        const response = await Adminservice.showAllStaff();
+        const response = await Adminservice.showAllStaff(); // API call for staff
         if (response.success) {
-          setStaff(response.staff);
+          setStaff(response.staff); // Set the staff data
         } else {
           toast.error("Failed to fetch staff.");
         }
@@ -28,7 +28,7 @@ function Staff() {
         console.error("Error fetching staff:", error);
         toast.error("Error fetching staff.");
       } finally {
-        setLoading(false);
+        setLoading(false); // Stop the loading spinner
       }
     };
 
@@ -138,7 +138,7 @@ function Staff() {
                     </td>
                     <td className="px-3 md:px-6 py-2 text-xs md:text-sm">
                       <img
-                        src={`https://sunny.napver.com/storage/${member.staff_image}`}
+                        src={`https://adminfoodi.napver.com/storage/${member.staff_image}`}
                         alt={member.name}
                         className="w-20 h-20 object-cover rounded shadow"
                       />
