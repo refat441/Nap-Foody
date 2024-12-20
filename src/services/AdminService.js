@@ -1,9 +1,9 @@
 import requests from "./httpRequest";
 const Adminservice = {
   //routs for category
-  showAllCategories: async () => requests.get("/admin/categories"), 
   categorystore: async (categoryData) => requests.post("/admin/categories", categoryData), 
-  toggleCategoryStatus: async (id) => requests.put(`/admin/categories/${id}/status`), 
+  showAllCategories: async () => requests.get("/admin/categories"), 
+  toggleCategoryStatus: async (id) => requests.put(`/admin/categories/status/${id}`), 
   updateCategory: async (id, formData) =>
     requests.put(`/categories/${id}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },

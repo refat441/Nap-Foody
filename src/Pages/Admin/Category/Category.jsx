@@ -15,6 +15,46 @@ const Category = () => {
   const [loading, setLoading] = useState(true);
   const [toggleStatusLoading, setToggleStatusLoading] = useState(null); // Track which category is
 
+  //create category
+  const [open, setOpen] = useState(false); // State for opening/closing the dialog
+  const [formData, setFormData] = useState({
+    name: "",
+    category_image: null, // Image file will be stored here
+  });
+
+  // Handle form input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle file input change for image
+  const handleImageChange = (e) => {
+    setFormData({ ...formData, category_image: e.target.files[0] });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Create a FormData object to handle file uploads
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("category_image", formData.category_image);
+
+    try {
+      const response = await Adminservice.categorystore(data);
+      if (response && response.message === "Category created successfully") {
+        toast.success("Category added successfully!");
+        setOpen(false); // Close the dialog
+        setFormData({ name: "", category_image: null }); // Reset the form
+      }
+    } catch (error) {
+      toast.error("Error adding category.");
+      console.error("Error adding category:", error);
+    }
+  };
+
   // Fetch categories via API
   useEffect(() => {
     const fetchCategories = async () => {
@@ -131,6 +171,69 @@ const Category = () => {
         <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-violet-700">
           Category List
         </h1>
+      </div>
+      <div>
+        {/* Button to open dialog */}
+        <button
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
+          onClick={() => setOpen(true)}
+        >
+          Add Category
+        </button>
+
+        {/* Dialog */}
+        {open && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white w-96 p-6 rounded-lg shadow-lg">
+              <h2 className="text-2xl font-semibold mb-4">Add New Category</h2>
+              <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-semibold">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full p-2 border border-gray-300 rounded"
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-semibold">
+                    Category Image
+                  </label>
+                  <input
+                    type="file"
+                    name="category_image"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    required
+                    className="w-full p-2 border border-gray-300 rounded"
+                  />
+                </div>
+
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="mr-4 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition duration-300"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
+                  >
+                    Add
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="bg-white shadow-lg rounded-lg overflow-hidden overflow-x-auto">
